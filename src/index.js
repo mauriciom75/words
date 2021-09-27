@@ -1,8 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import IconPanel from './components/IconPanel';
-import IconNav from './components/IconNav';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  //useParams
+} from "react-router-dom";
+
+
+
+
+import IconMain from './components/IconMain';
 
 class Square extends React.Component {
 
@@ -25,6 +35,7 @@ class Square extends React.Component {
           squares: Array(9).fill(null),
           xIsNext: true,
         };
+        
     }
 
     handleClick(i) {
@@ -47,7 +58,7 @@ class Square extends React.Component {
     render() {
       const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
   
-      const { topic } = route.params;
+
 
       return (
         <div>
@@ -67,9 +78,7 @@ class Square extends React.Component {
             {this.renderSquare(7)}
             {this.renderSquare(8)}
           </div>
-          <IconNav />
-          <IconPanel tema="tema1" />
-          {topic}
+          
         </div>
       );
     }
@@ -94,7 +103,20 @@ class Square extends React.Component {
   // ========================================
   
   ReactDOM.render(
-    <Game />,
+    //<Game />,
+    <Router>
+      <div>
+        <h2>Router</h2>
+
+        <Route exact path="/">
+          <IconMain />
+        </Route>
+
+        <Switch>
+          <Route path="/icon/:topic" children={<IconMain />} />
+        </Switch>
+      </div>
+    </Router>,
     document.getElementById('root')
   );
   

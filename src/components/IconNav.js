@@ -1,6 +1,10 @@
 import React from 'react';
 import '../index.css';
 
+import {
+  Link
+} from "react-router-dom";
+
 class IconNav extends React.Component {
 
     constructor(props) {
@@ -16,7 +20,7 @@ class IconNav extends React.Component {
 
     getData=()=>{
       const self = this;
-      fetch("groups/topics.json"
+      fetch("/groups/topics.json"
       ,{
         headers : { 
           'Content-Type': 'application/json',
@@ -39,7 +43,7 @@ class IconNav extends React.Component {
 
     navegate = () =>{
       //console.log("navegate");
-      this.props.navigation.navigate('/', { topic: 'tema1' })
+      //this.props.navigation.navigate('/', { topic: 'tema1' })
     }
 
     render() {
@@ -53,7 +57,7 @@ class IconNav extends React.Component {
           // note: we are adding a key prop here to allow react to uniquely identify each
           // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
           //rows.push(<div key={i}>{this.state.words[i].word}</div>);
-          rows.push(<div key={i} onClick={this.navegate()}>{this.state.topics[i].topic}  </div> );
+          rows.push(<div key={i}><Link to={"/icon/"+this.state.topics[i].topic}>{this.state.topics[i].topic}</Link></div> );
         }
 
         return (

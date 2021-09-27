@@ -7,17 +7,30 @@ class IconPanel extends React.Component {
     constructor(props) {
         super(props);
         
-        this.getData();
 
         this.state = {
 
             loading : true,
+            topic : ""
           };
+
+        this.getData();
+
     }
 
+
+    componentDidUpdate(prevProps) {
+      // Uso tipico (no olvides de comparar las props):
+      if (this.props.topic !== prevProps.topic) {
+        this.getData();
+      }
+    }
+    
     getData=()=>{
       const self = this;
-      fetch("groups/" + this.props.tema + "/words.json"
+      //self.setState({loading: true });
+
+      fetch("/groups/" + this.props.topic + "/words.json"
       ,{
         headers : { 
           'Content-Type': 'application/json',
@@ -41,6 +54,8 @@ class IconPanel extends React.Component {
 
     render() {
   
+
+  
       if (this.state.loading) {
         return <div>Loading :D...</div>
       }
@@ -50,13 +65,13 @@ class IconPanel extends React.Component {
           // note: we are adding a key prop here to allow react to uniquely identify each
           // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
           //rows.push(<div key={i}>{this.state.words[i].word}</div>);
-          rows.push(<IconWord key={i} topic={this.props.tema} word={this.state.words[i].word}/>);
+          rows.push(<IconWord key={i} topic={this.props.topic} word={this.state.words[i].word}/>);
         }
 
         return (
           <div>
             <div>
-              {this.props.tema}
+              {this.props.topic}
             </div>
             <div>
               rows

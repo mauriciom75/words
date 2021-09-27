@@ -9,8 +9,8 @@ class IconWord extends React.Component {
         
             
         this.state = {
-            audio : new Audio("groups/" + this.props.topic + "/" + this.props.word + ".mp3"),
-            urlImage : "groups/" + this.props.topic + "/" + this.props.word + ".png"
+            audio : new Audio("/groups/" + this.props.topic + "/" + this.props.word + ".mp3"),
+            urlImage : "/groups/" + this.props.topic + "/" + this.props.word + ".png"
           };
     }
     playSound = audioFile => {
