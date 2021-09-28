@@ -49,3 +49,9 @@ body {
     margin-left: 20px;
   }
   
+
+
+  .large-menu-classname ul li{
+    display: inline-block;
+    margin: 10px;
+    }

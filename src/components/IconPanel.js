@@ -1,5 +1,9 @@
 import React from 'react';
 import '../index.css';
+
+import { Grid, Row, Col } from 'react-flexbox-grid';
+
+
 import IconWord from '../components/IconWord';
 
 class IconPanel extends React.Component {
@@ -20,15 +24,16 @@ class IconPanel extends React.Component {
 
 
     componentDidUpdate(prevProps) {
+      const self = this;
       // Uso tipico (no olvides de comparar las props):
       if (this.props.topic !== prevProps.topic) {
+        self.setState({loading: true });
         this.getData();
       }
     }
     
     getData=()=>{
       const self = this;
-      //self.setState({loading: true });
 
       fetch("/groups/" + this.props.topic + "/words.json"
       ,{
@@ -52,6 +57,12 @@ class IconPanel extends React.Component {
     }
 
 
+    divStyle = {
+      backgroundColor: 'LightGray',
+      margin : '10px'
+    };
+
+
     render() {
   
 
@@ -65,18 +76,24 @@ class IconPanel extends React.Component {
           // note: we are adding a key prop here to allow react to uniquely identify each
           // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
           //rows.push(<div key={i}>{this.state.words[i].word}</div>);
-          rows.push(<IconWord key={i} topic={this.props.topic} word={this.state.words[i].word}/>);
+          rows.push(
+          <Col key={i}>
+            <div style={this.divStyle}>
+              <IconWord key={i} topic={this.props.topic} word={this.state.words[i].word}/>
+            </div>
+          </Col>);
         }
 
         return (
           <div>
             <div>
-              {this.props.topic}
+              <h2>{this.props.topic}</h2>
             </div>
-            <div>
-              rows
-              {rows}
-            </div>
+            <Grid fluid>
+              <Row>
+                {rows}
+              </Row>
+            </Grid>
 
           </div>
         );

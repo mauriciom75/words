@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import './index.css';
 
 import {
@@ -106,7 +107,6 @@ class Square extends React.Component {
     //<Game />,
     <Router>
       <div>
-        <h2>Router</h2>
 
         <Route exact path="/">
           <IconMain />
@@ -116,7 +116,9 @@ class Square extends React.Component {
           <Route path="/icon/:topic" children={<IconMain />} />
         </Switch>
       </div>
-    </Router>,
+
+    </Router>
+    ,
     document.getElementById('root')
   );
   
